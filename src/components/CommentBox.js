@@ -15,9 +15,9 @@ class CommentBox extends Component {
         this.props.saveComment((this.state.comment));
         this.setState({comment: ''});
     };
-
     render() {
         return (
+        <div>
             <form onSubmit={this.handleSubmit}>
                 <h4> Add a Comment
                 <textarea onChange={this.handleChange} value= {this.state.comment} />
@@ -27,6 +27,8 @@ class CommentBox extends Component {
                 </div>
                 </h4>
             </form>
+            <button onClick={this.props.fetchComments()}>Fetch Comments</button>
+        </div>
         )
     }
 }

@@ -7,13 +7,22 @@ import Root from 'Root';
 let wrapped;
 
 beforeEach(() => {
+    const initialState = {
+        comments: ['Comment 1', 'Comment 2']
+    }
+    
     wrapped = mount(
-        <Root>
-         <CommentList comment={['asdf', 'asdf']}/>
+        <Root initialState={initialState}>
+         <CommentList />
         </Root>
     )
 })
 
-it('creates one LI per comment', ()=>{
+it('creates one LI per comment', () => {
+  expect(wrapped.find('li').length).toEqual(2)
+}) 
 
+it('creates one LI per comment', ()=>{
+ expect(wrapped.render().text()).toContain('Comment 1');
+ expect(wrapped.render().text()).toContain('Comment 1');
 }) 
