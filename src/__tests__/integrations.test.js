@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Root from 'Root';
+import moxios from 'moxios'
 import App from 'components/App';
 
 beforeEach(()=>{
@@ -15,7 +16,7 @@ afterEach(()=>{
     moxios.uninstall();
 })
 
-it('can fetch a list of comments and display them', () =>{
+it('can fetch a list of comments and display them', (done) =>{
     //Attempt to render the *entire* app
     const wrapped = mount(
         <Root>
@@ -28,6 +29,13 @@ it('can fetch a list of comments and display them', () =>{
 
 
     // Expect to find a list of comments!
-    expect(wrapped.find('li').length).toEqual(500);
 
+   moxios.wait(()=>{
+        wrapped.update();
+
+        expect(wrapped.find('li').length).toEqual(2);
+
+        done();
+        wrapped.unmount();
+    }, 100);
 });  
