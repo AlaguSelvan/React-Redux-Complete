@@ -20,7 +20,7 @@ export default ChildComponent => {
     }
 
     render() {
-      return <ChildComponent {...this.props} />;
+      return <ChildComponent{...this.props} />;
     }
   }
 
